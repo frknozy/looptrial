@@ -1,9 +1,9 @@
 import Phaser from "phaser";
 import { BootScene } from "./scenes/BootScene";
 import { MainMenuScene } from "./scenes/MainMenuScene";
+import { NameEntryScene } from "./scenes/NameEntryScene";
 import { GameScene } from "./scenes/GameScene";
-import { GameOverScene } from "./scenes/GameOverScene";
-import { VictoryScene } from "./scenes/VictoryScene";
+import { LeaderboardScene } from "./scenes/LeaderboardScene";
 
 export const gameConfig: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -11,7 +11,16 @@ export const gameConfig: Phaser.Types.Core.GameConfig = {
   width: 960,
   height: 540,
   backgroundColor: "#10131a",
-  scene: [BootScene, MainMenuScene, GameScene, GameOverScene, VictoryScene],
+  dom: {
+    createContainer: true
+  },
+  scene: [
+    BootScene,
+    MainMenuScene,
+    NameEntryScene,
+    GameScene,
+    LeaderboardScene
+  ],
   physics: {
     default: "arcade",
     arcade: {

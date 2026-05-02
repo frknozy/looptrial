@@ -2,8 +2,23 @@ export type MinigameId =
   | "reaction"
   | "dodge"
   | "doubleTap"
+  | "holdRelease"
+  | "movingTarget"
+  | "perfectTiming"
   | "pick"
   | "memory"
+  | "findDifferent"
+  | "matchPair"
+  | "colorRecall"
+  | "patternRepeat"
+  | "smallTarget"
+  | "movingDot"
+  | "aimDirection"
+  | "shrinkingCircle"
+  | "laneSwitch"
+  | "avoidRed"
+  | "escapeBox"
+  | "surviveThree"
   | "penalty";
 
 export class MinigameManager {
@@ -11,8 +26,23 @@ export class MinigameManager {
     "reaction",
     "dodge",
     "doubleTap",
+    "holdRelease",
+    "movingTarget",
+    "perfectTiming",
     "pick",
     "memory",
+    "findDifferent",
+    "matchPair",
+    "colorRecall",
+    "patternRepeat",
+    "smallTarget",
+    "movingDot",
+    "aimDirection",
+    "shrinkingCircle",
+    "laneSwitch",
+    "avoidRed",
+    "escapeBox",
+    "surviveThree",
     "penalty"
   ];
 

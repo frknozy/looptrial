@@ -11,9 +11,7 @@ export class DodgeMinigame {
 
   /** Total time player must survive (seconds). */
   getRoundDurationSec(): number {
-    const base = 5.2;
-    const decay = (this.level - 1) * 0.28;
-    return Math.max(2.6, base - decay);
+    return 15;
   }
 
   /** How often a new obstacle spawns (ms). */
@@ -25,9 +23,9 @@ export class DodgeMinigame {
 
   /** Vertical speed of obstacles (pixels per second). */
   getObstacleFallSpeed(): number {
-    const base = 210;
-    const boost = (this.level - 1) * 18;
-    return Math.min(420, base + boost);
+    const base = 600;
+    const boost = (this.level - 1) * 44;
+    return Math.min(1080, base + boost);
   }
 
   /** Horizontal move speed for the player (pixels per second). */
