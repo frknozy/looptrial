@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { getLeaderboardSorted } from "../core/leaderboardStorage";
+import { clearPlayerName, resolvePlayerName } from "../core/playerSession";
 
 export class LeaderboardScene extends Phaser.Scene {
   constructor() {
@@ -71,8 +72,8 @@ export class LeaderboardScene extends Phaser.Scene {
     };
 
     const goPlayAgain = () => {
-      const raw = this.registry.get("playerName") as string | undefined;
-      if (raw?.trim()) {
+      const playerName = resolvePlayerName(this.game);
+      if (playerName && playerName.trim().length > 0) {
         this.scene.start("GameScene");
       } else {
         this.scene.start("NameEntryScene");
@@ -122,7 +123,7 @@ export class LeaderboardScene extends Phaser.Scene {
     playAgain.on("pointerup", goPlayAgain);
 
     changeName.on("pointerup", () => {
-      this.registry.remove("playerName");
+      clearPlayerName(this.game);
       this.scene.start("NameEntryScene");
     });
 

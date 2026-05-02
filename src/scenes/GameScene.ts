@@ -27,6 +27,7 @@ import { EscapeBoxMinigame } from "../minigames/escapebox/EscapeBoxMinigame";
 import { SurviveThreeMinigame } from "../minigames/survivethree/SurviveThreeMinigame";
 import type { MountCtx } from "./extraUi/mountTypes";
 import { upsertLeaderboardEntry } from "../core/leaderboardStorage";
+import { resolvePlayerName } from "../core/playerSession";
 import {
   mountPick,
   mountMemory,
@@ -309,8 +310,7 @@ export class GameScene extends Phaser.Scene {
 
   /** Run bitti: skoru kaydet (isim varsa), sıfırla, leaderboard. */
   private finishRunAndShowBoard(completedLevels: number): void {
-    const raw = this.registry.get("playerName") as string | undefined;
-    const name = raw?.trim();
+    const name = resolvePlayerName(this.game);
     if (name) {
       upsertLeaderboardEntry(name, completedLevels);
     }

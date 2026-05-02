@@ -3,6 +3,7 @@ import {
   MAX_PLAYER_NAME_LENGTH,
   playerNameOrFallback
 } from "../core/leaderboardStorage";
+import { persistPlayerName } from "../core/playerSession";
 
 /** Tek isim — registry’de saklanır; leaderboard ile uyumlu normalize edilir. */
 export class NameEntryScene extends Phaser.Scene {
@@ -45,7 +46,7 @@ export class NameEntryScene extends Phaser.Scene {
     const start = () => {
       const raw = input?.value ?? "";
       const name = playerNameOrFallback(raw);
-      this.registry.set("playerName", name);
+      persistPlayerName(this.game, name);
       dom.destroy();
       this.scene.start("GameScene");
     };

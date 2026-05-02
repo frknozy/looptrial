@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { resolvePlayerName } from "../core/playerSession";
 
 export class MainMenuScene extends Phaser.Scene {
   constructor() {
@@ -39,7 +40,11 @@ export class MainMenuScene extends Phaser.Scene {
     });
 
     startText.on("pointerup", () => {
-      this.scene.start("NameEntryScene");
+      if (resolvePlayerName(this.game)) {
+        this.scene.start("GameScene");
+      } else {
+        this.scene.start("NameEntryScene");
+      }
     });
   }
 }
