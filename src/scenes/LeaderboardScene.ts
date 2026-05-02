@@ -70,9 +70,21 @@ export class LeaderboardScene extends Phaser.Scene {
       });
     };
 
+    const goPlayAgain = () => {
+      const raw = this.registry.get("playerName") as string | undefined;
+      if (raw?.trim()) {
+        this.scene.start("GameScene");
+      } else {
+        this.scene.start("NameEntryScene");
+      }
+    };
+
+    const cx = width / 2;
+    const step = Math.min(200, width * 0.2);
+
     const playAgain = this.add
-      .text(width / 2 - 115, btnY, "Play Again", {
-        fontSize: "18px",
+      .text(cx - step, btnY, "Play Again", {
+        fontSize: "17px",
         color: "#80deea",
         fontFamily: "Segoe UI, Roboto, Arial",
         stroke: "#050816",
@@ -81,9 +93,20 @@ export class LeaderboardScene extends Phaser.Scene {
       .setOrigin(0.5)
       .setInteractive({ useHandCursor: true });
 
+    const changeName = this.add
+      .text(cx, btnY, "Change Name", {
+        fontSize: "17px",
+        color: "#ffd54f",
+        fontFamily: "Segoe UI, Roboto, Arial",
+        stroke: "#050816",
+        strokeThickness: 4
+      })
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true });
+
     const menu = this.add
-      .text(width / 2 + 115, btnY, "Menu", {
-        fontSize: "18px",
+      .text(cx + step, btnY, "Menu", {
+        fontSize: "17px",
         color: "#cfd8dc",
         fontFamily: "Segoe UI, Roboto, Arial",
         stroke: "#050816",
@@ -93,14 +116,17 @@ export class LeaderboardScene extends Phaser.Scene {
       .setInteractive({ useHandCursor: true });
 
     bindHover(playAgain, "#b2ebf2", "#80deea");
+    bindHover(changeName, "#ffe082", "#ffd54f");
     bindHover(menu, "#eceff1", "#cfd8dc");
 
-    playAgain.on("pointerup", () => {
+    playAgain.on("pointerup", goPlayAgain);
+
+    changeName.on("pointerup", () => {
+      this.registry.remove("playerName");
       this.scene.start("NameEntryScene");
     });
 
     menu.on("pointerup", () => {
-      this.registry.remove("playerName");
       this.scene.start("MainMenuScene");
     });
 
@@ -113,7 +139,7 @@ export class LeaderboardScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.input.keyboard?.once("keydown-R", () => {
-      this.scene.start("NameEntryScene");
+      goPlayAgain();
     });
   }
 }
